@@ -29,6 +29,8 @@ const nextConfig = {
     ],
   },
 
+  
+
   serverExternalPackages: ["@node-rs/argon2"],
   typescript: {
     ignoreBuildErrors: true,
@@ -47,6 +49,7 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: "25mb",
     },
+    authInterrupts:true,
   },
 };
 

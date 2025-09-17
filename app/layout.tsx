@@ -6,6 +6,7 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Header1 from "@/components/layout/Header1";
+import Footer from "@/components/layout/Footer";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -45,6 +46,7 @@ export default function RootLayout({
             {/* <Header /> */}
             <Header1 />
             {children}
+            <Footer />
           </TanstackQueryProvider>
           <Toaster richColors position="top-center" />
         </ThemeProvider>

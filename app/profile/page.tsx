@@ -1,18 +1,17 @@
-import SidebarDashboard from "@/components/dashboard/Sidebar";
+import SidebarProfile from "@/components/profile/Sidebar";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { unauthorized } from "next/navigation";
 import React from "react";
 
-export default async function DashboardPage() {
+export default async function ProfilePage() {
   const headersList = await headers();
   const session = await auth.api.getSession({
     headers: headersList,
   });
 
-  if (!session || session.user?.role !== "ADMIN") {
+  if (!session) {
     return unauthorized();
   }
-
-  return <SidebarDashboard />;
+  return <SidebarProfile />;
 }

@@ -4,17 +4,8 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
 import LoginSystem from "./LoginSystem";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
-import { Menu } from "lucide-react";
-import { Button } from "../ui/button";
+
 import Link from "next/link";
-import { Separator } from "../ui/separator";
 import { motion } from "framer-motion";
 
 export default function Header1() {
@@ -47,14 +38,14 @@ export default function Header1() {
             >
               M
             </span>
-            <h1 className="text-xl font-semibold tracking-wide dark:text-white text-black drop-shadow-sm">
+            <h1 className="text-lg  font-semibold dark:text-white text-black drop-shadow-sm">
               Wholesale Market
             </h1>
           </motion.div>
         </Link>
 
         {/* Right side */}
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
           <LoginSystem />
           <ThemeToggle />
         </div>
