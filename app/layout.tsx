@@ -11,8 +11,11 @@ import Footer from "@/components/layout/Footer";
 const font = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Wholesale Muradnagar",
-  description: "wholesale products in muradnagar",
+  title: {
+    default: "Wholesale Muradnagar",
+    template: "%s | Wholesale Muradnagar",
+  },
+  description: "Wholesale products in Muradnagar",
 };
 
 export default function RootLayout({

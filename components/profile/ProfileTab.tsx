@@ -10,31 +10,17 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { updateUserPhone } from "@/actions/userPhoneAction";
 
-type SessionUser = {
-  id: string;
-  name: string;
-  email: string;
-  image?: string | null;
-  createdAt: Date;
-  role: "ADMIN" | "USER";
-  giraffeFact: string;
-  phone?: string;
-};
-
-type SessionType = {
-  user: SessionUser;
-};
-
 export default function ProfileTab() {
-  const { data: session } = useSession() as { data: SessionType | null };
-  const [phone, setPhone] = useState("");
+  const { data: session } = useSession();
+  const [phone, setPhone] = useState(session?.user?.phone || "");
   const [isPending, startTransition] = useTransition();
 
+  // Keep phone state updated if session changes
   useEffect(() => {
     if (session?.user?.phone) {
       setPhone(session.user.phone);
     }
-  }, [session]);
+  }, [session?.user?.phone]);
 
   const handleSavePhone = async () => {
     if (!phone) {
@@ -46,7 +32,7 @@ export default function ProfileTab() {
       try {
         const updatedUser = await updateUserPhone(phone);
         toast.success(`Phone number ${updatedUser.phone} saved successfully!`);
-        // Optionally refresh session/user state here
+        // Optionally update session/user here if needed
       } catch (e: any) {
         toast.error(e.message || "Failed to update phone.");
       }
@@ -54,9 +40,10 @@ export default function ProfileTab() {
   };
 
   return (
-    <div className="flex flex-col gap-6 h-full overflow-y-auto p-4">
+    <div className="flex flex-col gap-6 h-full overflow-y-auto ">
+      <span className="text-xl font-bold border-b">Profile</span>
       {/* Profile Header */}
-      <div className="flex flex-col items-center gap-4 py-6 rounded-2xl shadow-md bg-white">
+      <div className="flex flex-col items-center gap-4 py-6 rounded-2xl shadow-md">
         <Avatar className="w-24 h-24">
           <AvatarImage src={session?.user.image || ""} alt="User Image" />
           <AvatarFallback>{session?.user.name?.charAt(0)}</AvatarFallback>
@@ -64,15 +51,13 @@ export default function ProfileTab() {
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <User className="h-5 w-5" /> {session?.user.name}
         </h1>
-        <p className="text-gray-600">{session?.user.email}</p>
-        {session?.user.phone && (
-          <p className="text-gray-600">Phone: {session.user.phone}</p>
-        )}
+        <p className="">{session?.user.email}</p>
+        <p className="">Phone: {session?.user.phone}</p>
         <Badge className="uppercase">{session?.user.role}</Badge>
       </div>
 
       {/* Mobile Number Input */}
-      <div className="p-6 rounded-2xl shadow-md bg-white flex flex-col gap-4">
+      <div className=" rounded-2xl shadow-md flex flex-col gap-4">
         <Label htmlFor="phone">Mobile Number</Label>
         <Input
           id="phone"

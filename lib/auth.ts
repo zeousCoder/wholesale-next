@@ -110,6 +110,11 @@ const options = {
         type: ["USER", "ADMIN"],
         input: false,
       },
+      phone: {
+        type: "string",
+        input: true,
+        required: false,
+      },
     },
   },
   session: {
@@ -176,6 +181,7 @@ export const auth = betterAuth({
           image: user.image,
           createdAt: user.createdAt,
           role: user.role,
+          phone: user.phone,
           giraffeFact: "giraffes can sometimes nap with one eye open",
         },
       };

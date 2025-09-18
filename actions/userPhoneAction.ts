@@ -5,21 +5,26 @@ import prisma from "@/lib/prisma";
 import { headers } from "next/headers";
 
 export async function updateUserPhone(phone: string) {
-  if (!phone) {
-    throw new Error("No phone number provided");
+  if (!phone || phone.trim().length < 8) { // add your validation logic here
+    throw new Error("No valid phone number provided");
   }
 
-const headersList = await headers();
+  const headersList = await headers();
   const session = await auth.api.getSession({
     headers: headersList,
   });
 
-  if (!session?.user?.id) {
+
+
+  // Ensure authentication and id
+  const userId = session?.user?.id;
+  if (!userId) {
     throw new Error("Not authenticated");
   }
 
+  // Update user phone
   const user = await prisma.user.update({
-    where: { id: session.user.id },
+    where: { id: userId },
     data: { phone },
     select: {
       id: true,
@@ -32,4 +37,18 @@ const headersList = await headers();
   });
 
   return user;
+}
+
+export async function getUserDetails() {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      role: true,
+    },
+  });
+
+  return users;
 }

@@ -20,7 +20,7 @@ export default function Header1() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="container w-full flex items-center justify-between px-4 h-full 
+        className=" w-full flex items-center justify-between px-4 h-full 
           rounded-2xl shadow-2xl border border-black/20 dark:border-white/20
           backdrop-blur-xl bg-background/70
           transition-all duration-300"
@@ -33,8 +33,8 @@ export default function Header1() {
           >
             <span
               className="flex items-center justify-center w-10 h-10 rounded-full 
-              bg-gradient-to-br from-indigo-600 via-purple-500 to-cyan-400 
-              text-white font-bold shadow-md"
+              dark:bg-white bg-black
+              text-white dark:text-black font-bold shadow-md"
             >
               M
             </span>

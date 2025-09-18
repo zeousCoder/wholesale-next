@@ -38,10 +38,10 @@ export default function LoginSystem() {
 
   // Define menu items with routes
   const menuItems = [
-    { label: "Profile", icon: User, href: "/profile" },
-    { label: "Billing", icon: CreditCard, href: "/billing" },
-    { label: "Team", icon: Users, href: "/team" },
-    { label: "Subscription", icon: Package, href: "/subscription" },
+    { label: "Profile", icon: User, href: "/profile?tab=profile" },
+    { label: "Address", icon: CreditCard, href: "/profile?tab=address" },
+    { label: "Cart", icon: Users, href: "/profile?tab=cart" },
+    { label: "Wishlist", icon: Package, href: "/profile?tab=wishlist" },
   ];
 
   // If user is admin → add dashboard at top
