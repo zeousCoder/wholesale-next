@@ -79,11 +79,11 @@ export default function Footer() {
             </p>
 
             {/* Newsletter */}
-            <form className="space-y-3  w-full" onSubmit={handleSubmit}>
+            <form className="space-y-3 felx w-full" onSubmit={handleSubmit}>
               <Label htmlFor="newsletter" className="text-sm font-medium">
                 Subscribe to our Newsletter
               </Label>
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <Input
                   type="email"
                   id="newsletter"

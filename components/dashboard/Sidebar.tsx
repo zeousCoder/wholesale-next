@@ -20,6 +20,7 @@ import {
   LogIn,
   Image,
   Newspaper,
+  List,
 } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -32,6 +33,7 @@ import AddressTab from "./AddressTab";
 import LoginDetailsTab from "./LoginDetailsTab";
 import BannerTab from "./BannerTab";
 import NewsletterTab from "./NewsletterTab";
+import CategoryTab from "./CategoryTab";
 
 export default function SidebarDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -96,6 +98,12 @@ export default function SidebarDashboard() {
       label: "Newsletter",
       icon: <Newspaper className="w-4 h-4" />,
       content: <NewsletterTab />,
+    },
+    {
+      value: "category",
+      label: "Categories",
+      icon: <List className="w-4 h-4" />,
+      content: <CategoryTab />,
     },
   ];
 

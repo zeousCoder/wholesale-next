@@ -121,3 +121,27 @@ model Newsletter {
 
   @@map("newsletters")
 }
+
+model Category {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String     @unique
+  Products  Products[]
+
+  @@map("categories")
+}
+
+model Products {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("products")
+}

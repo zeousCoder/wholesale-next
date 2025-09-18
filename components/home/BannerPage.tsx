@@ -38,7 +38,7 @@ export default function HomeBanner() {
       >
         {banners.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <div className="relative w-full lg:h-100 h-30">
+            <div className="relative w-full  lg:h-80 h-30">
               <Image
                 src={banner.image}
                 alt="Promotional banner"
