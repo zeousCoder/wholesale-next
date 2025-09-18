@@ -34,7 +34,7 @@ export default function About() {
       </section>
 
       {/* Brand Story */}
-      <Card className="bg-gray-50">
+      <Card className="">
         <CardHeader>
           <h2 className="text-xl font-semibold flex items-center gap-2">
             <MapPin className="h-5 w-5 text-cyan-500" /> Our Roots
