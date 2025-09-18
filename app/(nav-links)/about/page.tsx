@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sparkle, MapPin, ShoppingBag, ThumbsUp } from "lucide-react";
 import React from "react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
@@ -116,9 +117,11 @@ export default function About() {
           Reach out via our contact form, email, or call — our team is here to
           help!
         </p>
-        <Button variant="default" className="w-fit">
-          Contact Us
-        </Button>
+        <Link href="/contact">
+          <Button variant="default" className="w-fit">
+            Contact Us
+          </Button>
+        </Link>
       </section>
     </main>
   );
