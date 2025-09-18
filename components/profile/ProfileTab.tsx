@@ -41,7 +41,7 @@ export default function ProfileTab() {
 
   return (
     <div className="flex flex-col gap-6 h-full overflow-y-auto ">
-      <span className="text-xl font-bold border-b">Profile</span>
+      <span className="text-xl font-bold border-b pb-2">Profile</span>
       {/* Profile Header */}
       <div className="flex flex-col items-center gap-4 py-6 rounded-2xl shadow-md">
         <Avatar className="w-24 h-24">
@@ -57,7 +57,7 @@ export default function ProfileTab() {
       </div>
 
       {/* Mobile Number Input */}
-      <div className=" rounded-2xl shadow-md flex flex-col gap-4">
+      <div className=" rounded-2xl shadow-md flex flex-col p-4 gap-4">
         <Label htmlFor="phone">Mobile Number</Label>
         <Input
           id="phone"

@@ -27,6 +27,7 @@ model User {
   banExpires    DateTime?
   sessions      Session[]
   accounts      Account[]
+  Address       Address[]
 
   @@unique([email])
   @@map("users")
@@ -77,3 +78,29 @@ model Verification {
 
   @@map("verification")
 }
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  street    String
+  city      String
+  state     String
+  pincode   String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("address")
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  image     String
+  active    Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("banners")
+}
+  

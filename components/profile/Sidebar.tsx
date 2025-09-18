@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSearchParams, useRouter } from "next/navigation";
 import { User, MapPin, Heart, ShoppingBag, ShoppingCart } from "lucide-react";
 import ProfileTab from "./ProfileTab";
+import AddressTab from "./AddressTab";
 
 export default function SidebarProfile() {
   const searchParams = useSearchParams();
@@ -69,10 +70,7 @@ export default function SidebarProfile() {
             </TabsContent>
 
             <TabsContent value="address">
-              <h2 className="text-xl font-semibold mb-3">📍 Address</h2>
-              <p className="text-sm text-gray-600">
-                Add or update your delivery addresses here.
-              </p>
+              <AddressTab />
             </TabsContent>
 
             <TabsContent value="wishlist">

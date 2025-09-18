@@ -7,12 +7,6 @@ export default function Home() {
     <div className="w-full  px-4 flex flex-col gap-10 py-10 mx-auto">
       <BannerPage />
       <Categories />
-      <Categories />
-      <Categories />
-      <Categories />
-      <Categories />
-      <Categories />
-      <Categories />
     </div>
   );
 }

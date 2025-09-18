@@ -29,5 +29,7 @@ export const useUserDetails = () => {
         throw error;
       }
     },
+
+    staleTime: 1 * 1000,
   });
 };

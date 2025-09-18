@@ -16,6 +16,9 @@ import {
   ChartArea,
   Projector,
   Paperclip,
+  LogsIcon,
+  LogIn,
+  Image,
 } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -23,6 +26,10 @@ import { toast } from "sonner";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import Link from "next/link";
 import UserDetailsTab from "./UserDetailsTab";
+import { FaAddressBook } from "react-icons/fa";
+import AddressTab from "./AddressTab";
+import LoginDetailsTab from "./LoginDetailsTab";
+import BannerTab from "./BannerTab";
 
 export default function SidebarDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -63,6 +70,24 @@ export default function SidebarDashboard() {
       label: "user",
       icon: <User className="w-4 h-4" />,
       content: <UserDetailsTab />,
+    },
+    {
+      value: "address",
+      label: "address",
+      icon: <FaAddressBook className="w-4 h-4" />,
+      content: <AddressTab />,
+    },
+    {
+      value: "login-details",
+      label: "Login Details",
+      icon: <LogIn className="w-4 h-4" />,
+      content: <LoginDetailsTab />,
+    },
+    {
+      value: "banner",
+      label: "Manage Banners",
+      icon: <Image className="w-4 h-4" />,
+      content: <BannerTab />,
     },
   ];
 

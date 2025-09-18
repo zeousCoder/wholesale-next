@@ -12,15 +12,11 @@ import { Separator } from "../ui/separator";
 const footerLinks = [
   {
     group: "Quick Links",
-    items: [
-      { title: "Feedback", href: "/feedback" },
-      { title: "FAQ", href: "/faq" },
-    ],
+    items: [{ title: "FAQ", href: "/faq" }],
   },
   {
     group: "Support",
     items: [
-      { title: "Help Center", href: "/help-center" },
       { title: "Privacy Policy", href: "/privacy-policy" },
       { title: "Terms & Condition", href: "/terms-and-condition" },
     ],
