@@ -19,6 +19,7 @@ import {
   LogsIcon,
   LogIn,
   Image,
+  Newspaper,
 } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -30,6 +31,7 @@ import { FaAddressBook } from "react-icons/fa";
 import AddressTab from "./AddressTab";
 import LoginDetailsTab from "./LoginDetailsTab";
 import BannerTab from "./BannerTab";
+import NewsletterTab from "./NewsletterTab";
 
 export default function SidebarDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -88,6 +90,12 @@ export default function SidebarDashboard() {
       label: "Manage Banners",
       icon: <Image className="w-4 h-4" />,
       content: <BannerTab />,
+    },
+    {
+      value: "newsletter",
+      label: "Newsletter",
+      icon: <Newspaper className="w-4 h-4" />,
+      content: <NewsletterTab />,
     },
   ];
 

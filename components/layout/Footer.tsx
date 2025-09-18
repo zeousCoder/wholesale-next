@@ -7,6 +7,8 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { useState } from "react";
+import { useNewsletter } from "@/hooks/useNewsletter";
 
 // Footer sections
 const footerLinks = [
@@ -43,6 +45,16 @@ export default function Footer() {
   const isDashboard = pathname.startsWith("/dashboard");
   if (isDashboard) return null;
 
+  const [email, setEmail] = useState("");
+  const { subscribe, isSubscribing } = useNewsletter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    subscribe(email);
+    setEmail("");
+  };
+
   return (
     <footer className=" border-t ">
       <div className="mx-auto px-4 pt-5 ">
@@ -67,7 +79,7 @@ export default function Footer() {
             </p>
 
             {/* Newsletter */}
-            <form className="space-y-3  w-full">
+            <form className="space-y-3  w-full" onSubmit={handleSubmit}>
               <Label htmlFor="newsletter" className="text-sm font-medium">
                 Subscribe to our Newsletter
               </Label>
@@ -77,8 +89,13 @@ export default function Footer() {
                   id="newsletter"
                   placeholder="Enter your email"
                   className="h-9 text-sm"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-                <Button size="sm">Subscribe</Button>
+                <Button type="submit" size="sm" disabled={isSubscribing}>
+                  {isSubscribing ? "Subscribing..." : "Subscribe"}
+                </Button>
               </div>
               <span className="text-xs text-muted-foreground block">
                 Stay updated with the latest offers & news.
