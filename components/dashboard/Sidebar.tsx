@@ -22,6 +22,7 @@ import {
   Newspaper,
   List,
   ListOrdered,
+  Contact2,
 } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -39,6 +40,7 @@ import ProductsTab from "./ProductsTab";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import OrderDetaislTab from "./OrderDetaislTab";
 import PaymentTab from "./PaymentTab";
+import ContactTab from "./ContactTab";
 
 export default function SidebarDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -127,6 +129,12 @@ export default function SidebarDashboard() {
       label: "Payment Details",
       icon: <RiSecurePaymentFill className="w-4 h-4" />,
       content: <PaymentTab />,
+    },
+    {
+      value: "contact",
+      label: "Contact Us",
+      icon: <Contact2 className="w-4 h-4" />,
+      content: <ContactTab />,
     },
   ];
 

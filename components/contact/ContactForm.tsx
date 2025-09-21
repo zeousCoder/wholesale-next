@@ -7,8 +7,30 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
 import Link from "next/link";
+import React, { useRef, useTransition } from "react";
+import { submitContactForm } from "@/actions/contactAction";
+import { toast } from "sonner";
 
 export default function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isPending, startTransition] = useTransition();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current!);
+
+    startTransition(async () => {
+      const res = await submitContactForm(formData);
+
+      if (res.success) {
+        toast.success(res.message);
+        formRef.current?.reset(); // ✅ safe
+      } else {
+        toast.error(res.message);
+      }
+    });
+  }
   return (
     <section className="py-10">
       <div className="mx-auto w-full  px-4">
@@ -67,23 +89,30 @@ export default function ContactForm() {
             Fill in your details and our team will connect with you soon.
           </p>
 
-          <form className="space-y-6">
+          <form className="space-y-6" ref={formRef} onSubmit={handleSubmit}>
             <div className="space-y-2">
               <Label htmlFor="name">Full name</Label>
-              <Input type="text" id="name" required />
+              <Input type="text" id="name" name="name" required />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" required />
+              <Input type="email" id="email" name="email" required />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="msg">Message</Label>
-              <Textarea id="msg" rows={4} placeholder="Type your message..." />
+              <Textarea
+                id="msg"
+                name="message"
+                rows={4}
+                placeholder="Type your message..."
+              />
             </div>
 
-            <Button className="w-full">Submit Inquiry</Button>
+            <Button className="w-full" disabled={isPending}>
+              {isPending ? "Submitting..." : "Submit Inquiry"}
+            </Button>
           </form>
         </Card>
       </div>

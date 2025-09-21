@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "@/hooks/useAddToCart";
 import { useAddresses } from "@/hooks/useAddresses";
 import { Button } from "@/components/ui/button";
@@ -12,8 +12,10 @@ import { toast } from "sonner";
 
 import { useSession } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { data: session, isPending: sessionLoading } = useSession();
   const userId =
     session?.user?.id ||
@@ -73,14 +75,13 @@ export default function CheckoutPage() {
       </div>
     );
   }
+  useEffect(() => {
+    if (!cart || !cart.items || cart.items.length === 0) {
+      router.push("/"); // navigate safely inside useEffect
+    }
+  }, [cart, router]);
 
-  if (!cart || !cart.items || cart.items.length === 0) {
-    return (
-      <div className="p-8 text-center text-gray-500">Your cart is empty.</div>
-    );
-  }
-
-  const totalPrice = cart.items.reduce(
+  const totalPrice = cart?.items.reduce(
     (total: number, item: any) => total + item.quantity * item.product.price,
     0
   );
@@ -91,7 +92,7 @@ export default function CheckoutPage() {
       <div>
         <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
         <Card className="p-4 space-y-4">
-          {cart.items.map((item: any) => (
+          {cart?.items.map((item: any) => (
             <div
               key={item.id}
               className="flex items-center gap-4 border-b pb-3 last:border-b-0 last:pb-0"
@@ -114,7 +115,7 @@ export default function CheckoutPage() {
           ))}
           <div className="flex justify-between font-bold text-lg pt-4">
             <span>Total</span>
-            <span>₹{totalPrice.toFixed(2)}</span>
+            <span>₹{totalPrice?.toFixed(2)}</span>
           </div>
         </Card>
       </div>
@@ -209,7 +210,7 @@ export default function CheckoutPage() {
               disabled={!selectedAddress}
             />
             {!selectedAddress && (
-              <div className="text-xs text-red-500 mt-2">
+              <div className="text- text-center text-red-500 mt-2">
                 Please select or add an address to proceed.
               </div>
             )}
