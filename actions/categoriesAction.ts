@@ -36,7 +36,7 @@ export async function updateCategory(id: string, name: string) {
 export async function getCategoriesWithProducts() {
   try {
     return await prisma.category.findMany({
-      include: { Products: true },
+      include: { products: true },
       orderBy: { name: "asc" },
     });
   } catch (error) {

@@ -5,13 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import Link from "next/link";
 
 export default function ContactForm() {
@@ -67,24 +61,24 @@ export default function ContactForm() {
         </div>
 
         {/* Contact Form */}
-        <Card className="mx-auto max-w-3xl p-8 sm:p-12 shadow-md">
+        <Card className="mx-auto max-w-3xl p-8 shadow-md">
           <h3 className="text-2xl font-semibold mb-2">Send us your inquiry</h3>
           <p className="mb-8 text-gray-600 dark:text-gray-400">
             Fill in your details and our team will connect with you soon.
           </p>
 
           <form className="space-y-6">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="name">Full name</Label>
               <Input type="text" id="name" required />
             </div>
 
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input type="email" id="email" required />
             </div>
 
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="msg">Message</Label>
               <Textarea id="msg" rows={4} placeholder="Type your message..." />
             </div>

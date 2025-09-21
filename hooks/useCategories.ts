@@ -55,7 +55,7 @@ export function useCategories() {
             : cat.updatedAt,
       }));
     },
-    staleTime: 1 * 1000, // 1 sec cache
+    staleTime: 1000, // 1 sec cache
   });
 
   // 📌 Fetch categories with products
@@ -78,9 +78,13 @@ export function useCategories() {
           cat.updatedAt instanceof Date
             ? cat.updatedAt.toISOString()
             : cat.updatedAt,
-        Products: cat.Products
-          ? cat.Products.map((prod) => ({
+        Products: cat.products
+          ? cat.products.map((prod) => ({
               ...prod,
+              image:
+                Array.isArray(prod.images) && prod.images.length > 0
+                  ? prod.images[0]
+                  : "",
               createdAt:
                 prod.createdAt instanceof Date
                   ? prod.createdAt.toISOString()
@@ -93,7 +97,7 @@ export function useCategories() {
           : [],
       }));
     },
-    staleTime: 60 * 1000,
+    staleTime: 1000,
   });
 
   // 📌 Add Category

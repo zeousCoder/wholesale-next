@@ -1,6 +1,6 @@
+import ContactForm from "@/components/contact/ContactForm";
 import { Metadata } from "next";
 import React from "react";
-import ContactForm from "./_components/ContactForm";
 
 export default function Contact() {
   return (

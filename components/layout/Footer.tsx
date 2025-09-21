@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
 import { useNewsletter } from "@/hooks/useNewsletter";
+import { useCategories } from "@/hooks/useCategories";
 
 // Footer sections
 const footerLinks = [
@@ -45,6 +46,8 @@ export default function Footer() {
   const isDashboard = pathname.startsWith("/dashboard");
   if (isDashboard) return null;
 
+  const { categories } = useCategories();
+
   const [email, setEmail] = useState("");
   const { subscribe, isSubscribing } = useNewsletter();
 
@@ -55,18 +58,21 @@ export default function Footer() {
     setEmail("");
   };
 
+  // Show only 5 categories
+  const displayedCategories = categories?.slice(0, 5) || [];
+
   return (
     <footer className=" border-t ">
       <div className="mx-auto px-4 pt-5 ">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-6">
           {/* Logo + Newsletter */}
           <div className="md:col-span-2 space-y-6">
             {/* Logo */}
             <Link href="/" aria-label="go home" className="block">
               <div className="flex items-center gap-3 cursor-pointer">
                 <span className="flex items-center justify-center w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black font-bold shadow-md">
-                  M
+                  W-M
                 </span>
                 <h1 className="text-lg font-semibold dark:text-white text-black">
                   Wholesale Market
@@ -103,6 +109,33 @@ export default function Footer() {
             </form>
           </div>
 
+          {/* Categories */}
+          <div className="lg:block hidden">
+            <span className="block font-semibold text-sm mb-3">Categories</span>
+            <ul className="space-y-2 text-sm">
+              {displayedCategories.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    href={`/category/${cat.id}`}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Show More link if more than 5 */}
+            {categories && categories.length > 5 && (
+              <Link
+                href="/category"
+                className="mt-2 block text-sm text-primary hover:underline"
+              >
+                Show More →
+              </Link>
+            )}
+          </div>
+
           {/* Link Groups */}
           <div className="md:col-span-3 grid grid-cols-2 gap-8 sm:grid-cols-3">
             {footerLinks.map((section, idx) => (
@@ -124,6 +157,34 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
+            {/* Categories */}
+            <div className="block lg:hidden">
+              <span className="block font-semibold text-sm mb-3">
+                Categories
+              </span>
+              <ul className="space-y-2 text-sm">
+                {displayedCategories.map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      href={`/category/${cat.id}`}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {cat.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Show More link if more than 5 */}
+              {categories && categories.length > 5 && (
+                <Link
+                  href="/category"
+                  className="mt-2 block text-sm text-primary hover:underline"
+                >
+                  Show More →
+                </Link>
+              )}
+            </div>
           </div>
         </div>
 

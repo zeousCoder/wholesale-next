@@ -1,35 +1,50 @@
-// app/category/[id]/page.tsx
-import { Metadata } from "next";
-import prisma from "@/lib/prisma";
+"use client";
+import ProductCard from "@/components/layout/ProductCard";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Highlighter } from "@/components/ui/highlighter";
+import { useCategories } from "@/hooks/useCategories";
+import { useProducts } from "@/hooks/useProducts";
+import { useParams } from "next/navigation";
+import React from "react";
 
-type Props = {
-  params: { id: string };
-};
+export default function page() {
+  const { id } = useParams();
+  const { products } = useProducts();
+  const { categories } = useCategories();
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return { title: `Category: ${params.id}` };
-}
-
-export default async function CategoryPage({ params }: Props) {
-  const products = await prisma.products.findMany({
-    where: { categoryId: params.id },
-  });
-
+  const categoryName = categories?.find((cat) => cat.id === id)?.name;
+  const filteredProducts = products?.filter((prod) => prod?.categoryId === id);
   return (
-    <main className=" w-full  px-4 flex flex-col gap-10 py-10 mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Products in Category</h1>
-      {products.length === 0 ? (
-        <p>No products found for this category.</p>
+    <div className="flex w-full mx-auto px-4 py-10 flex-col gap-6">
+      <div className="flex items-center">
+        <span className="flex gap-4 items-center ">
+          <p className="lg:text-2xl text-base font-bold">
+            <Highlighter action="highlight" color="#FF9800">
+              All Products Under this -
+            </Highlighter>
+          </p>
+          <Highlighter action="underline" color="#87CEFA">
+            {categoryName || "Category"}
+          </Highlighter>
+        </span>
+      </div>
+      {products?.length === 0 ? (
+        <div className="text-red-500">No products under this Category</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {products.map((prod) => (
-            <div key={prod.id} className="border p-4 rounded shadow">
-              <h2 className="font-semibold">{prod.name}</h2>
-              {/* Add image, price, and other details as needed */}
-            </div>
+        <div className="grid lg:grid-cols-5 gap-4">
+          {filteredProducts?.map((p) => (
+            <ProductCard key={p.id} product={p} />
           ))}
         </div>
       )}
-    </main>
+    </div>
   );
 }

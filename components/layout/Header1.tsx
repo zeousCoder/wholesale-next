@@ -7,10 +7,15 @@ import LoginSystem from "./LoginSystem";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import WishlistSheet from "./WishlistSheet";
+import { useSession } from "@/lib/auth-client";
+import CartSheet from "./CartSheet";
 
 export default function Header1() {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
+  const { data: session } = useSession();
+  const user = session?.user?.id;
 
   if (isDashboard) return null;
 
@@ -32,13 +37,13 @@ export default function Header1() {
             className="flex flex-row items-center gap-3 cursor-pointer"
           >
             <span
-              className="flex items-center justify-center w-10 h-10 rounded-full 
+              className="flex items-center justify-center w-12 h-12 rounded-full 
               dark:bg-white bg-black
               text-white dark:text-black font-bold shadow-md"
             >
-              M
+              W-M
             </span>
-            <h1 className="text-lg  font-semibold dark:text-white text-black drop-shadow-sm">
+            <h1 className="text-lg lg:block hidden font-semibold dark:text-white text-black drop-shadow-sm">
               Wholesale Market
             </h1>
           </motion.div>
@@ -46,8 +51,10 @@ export default function Header1() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          <LoginSystem />
+          <CartSheet userId={user ?? ""} />
+          <WishlistSheet userId={user ?? ""} />
           <ThemeToggle />
+          <LoginSystem />
         </div>
       </motion.div>
     </header>

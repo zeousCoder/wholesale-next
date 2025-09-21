@@ -21,6 +21,7 @@ import {
   Image,
   Newspaper,
   List,
+  ListOrdered,
 } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -28,12 +29,16 @@ import { toast } from "sonner";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import Link from "next/link";
 import UserDetailsTab from "./UserDetailsTab";
-import { FaAddressBook } from "react-icons/fa";
+import { FaAddressBook, FaProductHunt } from "react-icons/fa";
 import AddressTab from "./AddressTab";
 import LoginDetailsTab from "./LoginDetailsTab";
 import BannerTab from "./BannerTab";
 import NewsletterTab from "./NewsletterTab";
 import CategoryTab from "./CategoryTab";
+import ProductsTab from "./ProductsTab";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import OrderDetaislTab from "./OrderDetaislTab";
+import PaymentTab from "./PaymentTab";
 
 export default function SidebarDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -105,6 +110,24 @@ export default function SidebarDashboard() {
       icon: <List className="w-4 h-4" />,
       content: <CategoryTab />,
     },
+    {
+      value: "product",
+      label: "Products",
+      icon: <FaProductHunt className="w-4 h-4" />,
+      content: <ProductsTab />,
+    },
+    {
+      value: "orders",
+      label: "Order Details",
+      icon: <ListOrdered className="w-4 h-4" />,
+      content: <OrderDetaislTab />,
+    },
+    {
+      value: "payment",
+      label: "Payment Details",
+      icon: <RiSecurePaymentFill className="w-4 h-4" />,
+      content: <PaymentTab />,
+    },
   ];
 
   const SidebarContent = ({ onTabChange }: { onTabChange?: () => void }) => (
@@ -121,13 +144,13 @@ export default function SidebarDashboard() {
 
       {/* Tabs List */}
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground/20">
-        <TabsList className="flex flex-col gap-3 h-auto w-full bg-transparent p-2 space-y-1">
+        <TabsList className="flex flex-col gap-1 h-auto w-full bg-transparent p-2 space-y-1">
           {tabsData.map((tab) => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
               onClick={onTabChange}
-              className="w-full justify-start gap-2 px-3 sm:px-4 py-2 sm:py-3 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted transition-colors"
+              className="w-full justify-start gap-2 p-2 text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-muted transition-colors"
             >
               {tab.icon}
               <span className="truncate">{tab.label}</span>

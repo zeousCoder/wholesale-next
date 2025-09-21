@@ -10,11 +10,11 @@ export default function Categories() {
     useCategories();
 
   if (isLoadingCategories) {
-    return null;
+    return <></>;
   }
 
   if (isErrorCategories) {
-    return null;
+    return <></>;
   }
 
   return (
@@ -37,10 +37,13 @@ export default function Categories() {
               href={`/category/${cat.id}`}
               aria-label={`View products in ${cat.name}`}
             >
-              <div>
-                <div className="flex items-center gap-2 text-md font-semibold">
-                  {cat.name}
-                </div>
+              <div
+                className="relative text-md font-semibold cursor-pointer
+  after:content-[''] after:absolute after:left-0 after:bottom-0 
+  after:w-0 after:h-[2px] after:bg-foreground after:transition-all after:duration-300 
+  hover:after:w-full"
+              >
+                {cat.name}
               </div>
             </Link>
           ))}

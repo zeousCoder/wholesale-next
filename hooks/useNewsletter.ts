@@ -25,7 +25,7 @@ export function useNewsletter() {
   const { mutate: subscribe, isPending: isSubscribing } = useMutation({
     mutationFn: (email: string) => postNewsletter(email),
     onSuccess: () => {
-      toast.success("Subscribed to newsletter successfully");
+      toast.success("Thankyou for subscribing to our newsletter!");
       queryClient.invalidateQueries({ queryKey: ["newsletters"] });
     },
     onError: (err: any) => {

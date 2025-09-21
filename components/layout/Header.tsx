@@ -51,7 +51,7 @@ export default function Header() {
               bg-gradient-to-br from-indigo-600 via-purple-500 to-cyan-400 
               text-white font-bold shadow-md"
             >
-              M
+              WM
             </span>
             <h1 className="text-xl font-semibold tracking-wide dark:text-white text-black drop-shadow-sm">
               Wholesale Market
@@ -115,11 +115,11 @@ export default function Header() {
                         bg-gradient-to-br from-indigo-600 via-purple-500 to-cyan-400 
                         text-white font-bold shadow-md"
                       >
-                        M
+                        WM
                       </span>
-                      <h1 className="text-xl font-semibold tracking-wide dark:text-white text-black drop-shadow-sm">
+                      {/* <h1 className="text-xl font-semibold tracking-wide dark:text-white text-black drop-shadow-sm">
                         Wholesale Market
-                      </h1>
+                      </h1> */}
                     </motion.div>
                   </Link>
                 </SheetTitle>

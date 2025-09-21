@@ -6,11 +6,17 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { User, MapPin, Heart, ShoppingBag, ShoppingCart } from "lucide-react";
 import ProfileTab from "./ProfileTab";
 import AddressTab from "./AddressTab";
+import WishlistTab from "./WishlistTab";
+import OrdersTab from "./OrdersTab";
+import { useSession } from "@/lib/auth-client";
+import CartTab from "./CartTab";
 
 export default function SidebarProfile() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeTab = searchParams.get("tab") || "profile";
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
 
   const tabs = [
     { value: "profile", label: "Profile", icon: <User className="h-5 w-5" /> },
@@ -74,24 +80,15 @@ export default function SidebarProfile() {
             </TabsContent>
 
             <TabsContent value="wishlist">
-              <h2 className="text-xl font-semibold mb-3">❤️ Wishlist</h2>
-              <p className="text-sm text-gray-600">
-                View and manage your saved items.
-              </p>
+              <WishlistTab />
             </TabsContent>
 
             <TabsContent value="orders">
-              <h2 className="text-xl font-semibold mb-3">🛍 Orders</h2>
-              <p className="text-sm text-gray-600">
-                Track your recent and past orders.
-              </p>
+              <OrdersTab userId={userId ?? ""} />
             </TabsContent>
 
             <TabsContent value="cart">
-              <h2 className="text-xl font-semibold mb-3">🛒 Cart</h2>
-              <p className="text-sm text-gray-600">
-                Review and manage items in your shopping cart.
-              </p>
+              <CartTab userId={userId ?? ""} />
             </TabsContent>
           </ScrollArea>
         </div>
